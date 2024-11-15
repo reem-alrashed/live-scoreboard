@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Events\ScoreUpdated;  // Import the ScoreUpdated event
 
 class GameController extends Controller
 {
@@ -20,8 +21,11 @@ class GameController extends Controller
             broadcast(new ScoreUpdated($request->teamA_score, $request->teamB_score));
     
             // Return a response (optional)
-            return response()->json([
-                'message' => 'Score updated successfully',
-            ]);
+        // Return the updated scores in the response
+        return response()->json([
+            'message' => 'Score updated successfully',
+            'teamA_score' => $request->teamA_score,
+            'teamB_score' => $request->teamB_score,
+        ]);
         }
 }
