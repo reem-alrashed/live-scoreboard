@@ -7,7 +7,6 @@ use App\Events\ScoreUpdated;  // Import the ScoreUpdated event
 
 class GameController extends Controller
 {
-    //
         // This is the method that will handle the score update
         public function updateScore(Request $request)
         {
@@ -20,12 +19,14 @@ class GameController extends Controller
             // Broadcast the score update event
             broadcast(new ScoreUpdated($request->teamA_score, $request->teamB_score));
     
-            // Return a response (optional)
         // Return the updated scores in the response
         return response()->json([
-            'message' => 'Score updated successfully',
-            'teamA_score' => $request->teamA_score,
-            'teamB_score' => $request->teamB_score,
-        ]);
+            'message' => 'Score updated successfully!',
+            'success' => true,
+            'data' => [
+                'teamA_score' => $request->teamA_score,
+                'teamB_score' => $request->teamB_score,
+            ]
+        ]);        
         }
 }

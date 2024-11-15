@@ -27,7 +27,7 @@ class ScoreUpdated
 
 
     /**
-     * Get the channels the event should broadcast on.
+     * Get the channels the event should broadcast on. PrivateChannel means that it req
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
@@ -35,24 +35,9 @@ class ScoreUpdated
     {
         return new PrivateChannel('scoreboard');
     }
-        // Optional: Customize the event name on the front-end (e.g., 'score-updated')
+        // Customizes the event name on the front-end as score-updated
         public function broadcastAs()
         {
             return 'score-updated';
-        }
-        public function updateScore(Request $request)
-        {
-            // Validate the incoming request data
-            $request->validate([
-                'teamA_score' => 'required|integer',
-                'teamB_score' => 'required|integer',
-            ]);
-    
-            // Broadcast the score update
-            broadcast(new ScoreUpdated($request->teamA_score, $request->teamB_score));
-    
-            return response()->json([
-                'message' => 'Score updated successfully',
-            ]);
         }
 }

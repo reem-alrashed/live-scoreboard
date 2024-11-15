@@ -140,8 +140,8 @@
                     },
                     success: function (response) {
                         // Update displayed scores upon successful response
-                        $('#teamA_score').text(response.teamA_score);
-                        $('#teamB_score').text(response.teamB_score);
+                        $('#teamA_score').text(response.data.teamA_score);
+                        $('#teamB_score').text(response.data.teamB_score);
                     },
                     error: function (xhr, status, error) {
                         // Display error message if request fails
